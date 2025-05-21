@@ -5,14 +5,72 @@ models:
     description: Customer data with basic cleaning and transformation applied, one row per customer.
     columns:
       - name: TRANSACTIONID
-        description: The unique key for each customer.
+        description: The unique key for each transaction.
         tests:
           - not_null
           - unique
       - name: FLIGHTDATE
-
-
-
+        description: The date of the flight.
+        tests:
+          - not_null
+      - name: AIRLINECODE
+        description: The IATA code of the airline.
+      - name: AIRLINENAME
+        description: The name of the airline.
+      - name: TAILNUM
+        description: The aircraft tail number.
+      - name: FLIGHTNUM
+        description: The flight number.
+      - name: ORIGINAIRPORTCODE
+        description: IATA code of the origin airport.
+      - name: ORIGAIRPORTNAME
+        description: Name of the origin airport.
+      - name: ORIGINCITYNAME
+        description: City of the origin airport.
+      - name: ORIGINSTATE
+        description: State abbreviation of the origin.
+      - name: ORIGINSTATENAME
+        description: Full state name of the origin.
+      - name: DESTAIRPORTCODE
+        description: IATA code of the destination airport.
+      - name: DESTAIRPORTNAME
+        description: Name of the destination airport.
+      - name: DESTCITYNAME
+        description: City of the destination airport.
+      - name: DESTSTATE
+        description: State abbreviation of the destination.
+      - name: DESTSTATENAME
+        description: Full state name of the destination.
+      - name: CRSDEPTIME
+        description: Scheduled departure time.
+      - name: DEPTIME
+        description: Actual departure time.
+      - name: DEPDELAY
+        description: Departure delay in minutes.
+      - name: TAXIOUT
+        description: Taxi-out time in minutes.
+      - name: WHEELSOFF
+        description: Time when wheels left the ground.
+      - name: WHEELSON
+        description: Time when wheels touched down.
+      - name: TAXIIN
+        description: Taxi-in time in minutes.
+      - name: CRSARRTIME
+        description: Scheduled arrival time.
+      - name: ARRTIME
+        description: Actual arrival time.
+      - name: ARRDELAY
+        description: Arrival delay in minutes.
+      - name: CRSELAPSEDTIME
+        description: Scheduled elapsed time.
+      - name: ACTUALELAPSEDTIME
+        description: Actual elapsed time.
+      - name: CANCELLED
+        description: Indicates if the flight was cancelled.
+      - name: DIVERTED
+        description: Indicates if the flight was diverted.
+      - name: DISTANCE
+        description: Distance flown in miles.
 
 
 
