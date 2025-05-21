@@ -1,0 +1,188 @@
+version: 2
+
+models:
+  - name: stg_flights
+    description: Flight data with basic cleaning and transformation applied.
+    columns:
+      - name: transactionid
+        description: The unique key for each transaction.
+        data_tests:
+          - not_null
+          - unique
+      - name: flightdate
+        description: The date of the flight.
+        data_tests:
+          - not_null
+      - name: airlinecode
+        description: The IATA code of the airline.
+        data_tests:
+          - not_null
+      - name: airlinename
+        description: The name of the airline.
+        data_tests:
+          - not_null
+      - name: tailnum
+        description: The aircraft tail number.
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: flightnum
+        description: The flight number.
+        data_tests:
+          - not_null
+      - name: originairportcode
+        description: IATA code of the origin airport.
+        data_tests:
+          - not_null
+      - name: origairportname
+        description: Name of the origin airport.
+        data_tests:
+          - not_null
+      - name: origincityname
+        description: City of the origin airport.
+        data_tests:
+          - not_null
+      - name: originstate
+        description: State abbreviation of the origin.
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: originstatename
+        description: Full state name of the origin.
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: destairportcode
+        description: IATA code of the destination airport.
+        data_tests:
+          - not_null
+      - name: destairportname
+        description: Name of the destination airport.
+        data_tests:
+          - not_null
+      - name: destcityname
+        description: City of the destination airport.
+        data_tests:
+          - not_null
+      - name: deststate
+        description: State abbreviation of the destination.
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: deststatename
+        description: Full state name of the destination.
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: crsdeptime
+        description: Scheduled departure time.
+        data_tests:
+          - not_null
+      - name: deptime
+        description: Actual departure time.
+        # data_tests:
+        #   - not_null
+      - name: depdelay
+        description: Departure delay in minutes.
+        # data_tests:
+        #   - not_null
+      - name: taxiout
+        description: Taxi-out time in minutes.
+        # data_tests:
+        #   - not_null
+      - name: wheelsoff
+        description: Time when wheels left the ground.
+        # data_tests:
+        #   - not_null
+      - name: wheelson
+        description: Time when wheels touched down.
+        # data_tests:
+        #   - not_null
+      - name: taxiin
+        description: Taxi-in time in minutes.
+        # data_tests:
+        #   - not_null
+      - name: crsarrtime
+        description: Scheduled arrival time.
+        data_tests:
+          - not_null
+      - name: arrtime
+        description: Actual arrival time.
+        # data_tests:
+        #   - not_null
+      - name: arrdelay
+        description: Arrival delay in minutes.
+        # data_tests:
+        #   - not_null
+      - name: crselapsedtime
+        description: Scheduled elapsed time.
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
+      - name: actualelapsedtime
+        description: Actual elapsed time.
+        # data_tests:
+        #   - not_null
+      - name: cancelled
+        description: Indicates if the flight was cancelled.
+        data_tests:
+          - not_null
+      - name: diverted
+        description: Indicates if the flight was diverted.
+        data_tests:
+          - not_null
+      - name: distance
+        description: Distance flown in miles.
+        data_tests:
+          - not_null
+
+  - name: dim_aircraft
+    description: Dimension table containing distinct aircraft identified by tail number.
+    columns:
+      - name: aircraft_key
+        description: Surrogate key generated from the tail number.
+      - name: tailnum
+        description: Unique tail number identifying the aircraft.
+
+  - name: dim_airline
+    description: Dimension table containing distinct airlines with their codes and names.
+    columns:
+      - name: airline_key
+        description: Surrogate key generated from the airline code.
+
+      - name: airlinecode
+        description: IATA code of the airline.
+
+      - name: airlinename
+        description: Name of the airline.
+
+  - name: dim_airport
+    description: >
+      Dimension table containing unique airport records derived from both origin and destination
+      airport information in the flights data.
+    columns:
+      - name: airport_key
+        description: Surrogate key generated from the airport code.
+
+      - name: airportcode
+        description: IATA code of the airport.
+
+      - name: airportname
+        description: Name of the airport.
+
+      - name: cityname
+        description: City where the airport is located.
+
+      - name: statecode
+        description: Abbreviated state where the airport is located.
+
+      - name: statename
+        description: Full state name where the airport is located.
+
+

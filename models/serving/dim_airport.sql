@@ -1,7 +1,6 @@
 {{
     config(
-        materialized='table',
-        schema='CANDIDATE_00211'
+        materialized='table'
     )
 }}
 
@@ -51,6 +50,7 @@ with cte_a as (
 )
 select 
     {{ dbt_utils.generate_surrogate_key(['airportcode']) }} AS airport_key,
+    airportcode,
     airportname,
     cityname,
     statecode,

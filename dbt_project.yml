@@ -35,11 +35,10 @@ clean-targets:         # directories to be removed by `dbt clean`
 # continue to be built as views. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 
-# models:
-#   flights:
-#     # Applies to all files under models/example/
-#     example:
-#       +materialized: view
+models:
+  flights:
+    # Applies to all files under models/example/
+      +materialized: view
 
-# vars:
-#   dbt_date:time_zone: "UTC"
+vars:
+  dbt_date:time_zone: "UTC"

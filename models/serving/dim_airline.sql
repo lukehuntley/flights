@@ -1,9 +1,9 @@
 {{
     config(
-        materialized='table',
-        schema='CANDIDATE_00211'
+        materialized='table'
     )
 }}
+
 with cte_a as (
     select        
         distinct airlinecode,
