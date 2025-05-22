@@ -43,6 +43,10 @@ A case study do ingest a flat file into Snowflake, normalise the data into star 
 
 -   I was unsure if further cleanup of **origairportname** and **destairportname** was required as I say some airport names had compound name with the forward slash e.g. George Bush Intercontinental/Houston.
 
+-   Removed `@` symbol from **tailnum**, however unsure if this is malformed character encoding.
+
+-   Numerous null values were found across multiple fields, not just in those typically associated with cancelled flights.
+
 ## :crystal_ball: Future Improvements
 -   Liaise with business to understand the compound airport names to determine if further cleaning is necessary e.g. George Bush Intercontinental/Houston. If so, consider a mapping table or dbt seed file.
 
