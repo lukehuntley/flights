@@ -57,3 +57,4 @@ select
     statecode,
     statename
 from cte_d
+order by airportcode asc

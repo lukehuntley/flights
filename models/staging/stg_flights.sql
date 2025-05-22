@@ -82,4 +82,7 @@ with cte_a as (
         -- cast(replace(distance, ' miles', '') as integer) as distance,
     from {{ source('raw_flights', 'raw_flights') }}
 )
-select * from cte_a
+select 
+    * 
+from cte_a
+order by cte_a.transactionid
