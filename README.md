@@ -41,7 +41,7 @@ A case study do ingest a flat file into Snowflake, normalise the data into star 
 
 -   There was no indication of timezone, therefore I assumed UTC as this is to my knowledge standard practise when storing time related information.
 
--   I was unsure if further cleanup of **orginairportname** and **destairportname** was required as I say some airport names had compound name with the forward slash e.g. George Bush Intercontinental/Houston.
+-   I was unsure if further cleanup of **origairportname** and **destairportname** was required as I say some airport names had compound name with the forward slash e.g. George Bush Intercontinental/Houston.
 
 ## :crystal_ball: Future Improvements
 -   Liaise with business to understand the compound airport names to determine if further cleaning is necessary e.g. George Bush Intercontinental/Houston. If so, consider a mapping table or dbt seed file.
