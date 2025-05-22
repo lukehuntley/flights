@@ -47,6 +47,7 @@ with cte_a as (
         statecode,
         statename
     from cte_c
+    where airportcode is not null
 )
 select 
     {{ dbt_utils.generate_surrogate_key(['airportcode']) }} AS airport_key,

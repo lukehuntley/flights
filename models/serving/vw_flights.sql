@@ -12,7 +12,7 @@ select
     airline.airlinename,
     origin_airport.airportname as origairportname,
     destination_airport.airportname as destairportname,
-    -- Additoinal columns worth including    
+    -- Additional columns worth including    
     -- f.flightdate,
     dt.date_day as flightdate,
     aircraft.tailnum,
@@ -30,6 +30,8 @@ select
     f.cancelled,  
     f.diverted,  
     f.distance  
+
+    -- add actual dep, arrival, wheelin and out
 from {{ ref('fact_flights') }} f
 join dim_airline as airline
     on airline.airline_key = f.airline_key

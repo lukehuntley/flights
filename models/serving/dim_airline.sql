@@ -9,6 +9,7 @@ with cte_a as (
         distinct airlinecode,
         airlinename
     from {{ ref('stg_flights') }}
+    where airlinecode is not null
 )
 select 
     {{ dbt_utils.generate_surrogate_key(['airlinecode']) }} AS airline_key,

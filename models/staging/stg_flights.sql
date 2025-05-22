@@ -1,5 +1,3 @@
-
-
 {{
     config(
         materialized='table',
@@ -12,7 +10,7 @@ with cte_a as (
         flightdate,        
         airlinecode,  
         trim(split_part(airlinename, ':', 1)) as airlinename, 
-        tailnum,  
+        replace(tailnum,'@','') AS tailnum, 
         flightnum,  
         originairportcode,  
         trim(split_part(origairportname, ':', 2)) as origairportname,  
@@ -24,33 +22,57 @@ with cte_a as (
         destcityname,  
         deststate,  
         deststatename,
-        case
-            when crsdeptime = 2400 then '0000'
-            else lpad(crsdeptime, 4, '0') 
+        -- case
+        --     when crsdeptime = 2400 then '0000'
+        --     else lpad(crsdeptime, 4, '0') 
+        -- end as crsdeptime,
+         case
+            when crsdeptime = 2400 then to_time('000000', 'HH24MISS')
+            else to_time(rpad(lpad(crsdeptime, 4, '0'), 6, '0'), 'HH24MISS')
         end as crsdeptime,
+        -- case
+        --     when deptime = 2400 then '0000'
+        --     else lpad(deptime, 4, '0') 
+        -- end as deptime,
         case
-            when deptime = 2400 then '0000'
-            else lpad(deptime, 4, '0') 
-        end as deptime,  
+            when deptime = 2400 then to_time('000000', 'HH24MISS')
+            else to_time(rpad(lpad(deptime, 4, '0'), 6, '0'), 'HH24MISS')
+        end as deptime,
         depdelay,  
         taxiout,
+        -- case
+        --     when wheelsoff = 2400 then '0000'
+        --     else lpad(wheelsoff, 4, '0') 
+        -- end as wheelsoff,
         case
-            when wheelsoff = 2400 then '0000'
-            else lpad(wheelsoff, 4, '0') 
-        end as wheelsoff, 
+            when wheelsoff = 2400 then to_time('000000', 'HH24MISS')
+            else to_time(rpad(lpad(wheelsoff, 4, '0'), 6, '0'), 'HH24MISS')
+        end as wheelsoff,
+        -- case
+        --     when wheelson = 2400 then '0000'
+        --     else lpad(wheelson, 4, '0') 
+        -- end as wheelson,
         case
-            when wheelson = 2400 then '0000'
-            else lpad(wheelson, 4, '0') 
-        end as wheelson,  
+            when wheelson = 2400 then to_time('000000', 'HH24MISS')
+            else to_time(rpad(lpad(wheelson, 4, '0'), 6, '0'), 'HH24MISS')
+        end as wheelson,
         taxiin,
+        -- case
+        --     when crsarrtime = 2400 then '0000'
+        --     else lpad(crsarrtime, 4, '0') 
+        -- end as crsarrtime,
         case
-            when crsarrtime = 2400 then '0000'
-            else lpad(crsarrtime, 4, '0') 
+            when crsarrtime = 2400 then to_time('000000', 'HH24MISS')
+            else to_time(rpad(lpad(crsarrtime, 4, '0'), 6, '0'), 'HH24MISS')
         end as crsarrtime,
+        -- case
+        --     when arrtime = 2400 then '0000'
+        --     else lpad(arrtime, 4, '0') 
+        -- end as arrtime,
         case
-            when arrtime = 2400 then '0000'
-            else lpad(arrtime, 4, '0') 
-        end as arrtime, 
+            when arrtime = 2400 then to_time('000000', 'HH24MISS')
+            else to_time(rpad(lpad(arrtime, 4, '0'), 6, '0'), 'HH24MISS')
+        end as arrtime,
         arrdelay,  
         crselapsedtime,  
         actualelapsedtime,  
@@ -66,31 +88,33 @@ with cte_a as (
         --     ),
         --     'YYYYMMDD HH24MI'
         --     ) AS departure_timestamp
-        case 
-            when deptime = 2400 then 
-                to_timestamp(
-                    concat(
-                        TO_CHAR(TO_DATE(TO_CHAR(flightdate), 'YYYYMMDD'), 'YYYYMMDD'),
-                        ' 0000'
-                    ),
-                    'YYYYMMDD HH24MI'
-                )
-            else
-                to_timestamp(
-                    concat(
-                        TO_CHAR(TO_DATE(TO_CHAR(flightdate), 'YYYYMMDD'), 'YYYYMMDD'), 
-                        ' ', 
-                        lpad(deptime, 4, '0')
-                    ),
-                    'YYYYMMDD HH24MI'
-                )
-        end as departure_timestamp,
+    --     case 
+    --         when deptime = 2400 then 
+    --             to_timestamp(
+    --                 concat(
+    --                     TO_CHAR(TO_DATE(TO_CHAR(flightdate), 'YYYYMMDD'), 'YYYYMMDD'),
+    --                     ' 0000'
+    --                 ),
+    --                 'YYYYMMDD HH24MI'
+    --             )
+    --         else
+    --             to_timestamp(
+    --                 concat(
+    --                     TO_CHAR(TO_DATE(TO_CHAR(flightdate), 'YYYYMMDD'), 'YYYYMMDD'), 
+    --                     ' ', 
+    --                     lpad(deptime, 4, '0')
+    --                 ),
+    --                 'YYYYMMDD HH24MI'
+    --             )
+    --     end as departure_timestamp,
     from {{ source('raw_flights', 'raw_flights') }}
 )
-select
-    cte_a.*,
-    DATEADD(MINUTE, cte_a.actualelapsedtime, cte_a.departure_timestamp) as arrival_timestamp
-from cte_a
+select * from cte_a
+-- select
+--     cte_a.*,
+--     DATEADD(MINUTE, cte_a.actualelapsedtime, cte_a.departure_timestamp) as arrival_timestamp
+-- from cte_a
+-- where cte_a.transactionid = '120382400'
 -- limit 100
 
 
