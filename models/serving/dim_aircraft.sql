@@ -5,7 +5,7 @@
 }}
 
 with cte_a as (
-    select        
+    select
         distinct tailnum
     from {{ ref('stg_flights') }}
     where tailnum is not null
