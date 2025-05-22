@@ -56,3 +56,4 @@ select
         else 0
     end as nextdayarr
 from cte_a
+order by cte_a.transactionid asc

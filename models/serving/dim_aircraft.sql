@@ -14,3 +14,4 @@ select
     {{ dbt_utils.generate_surrogate_key(['tailnum']) }} AS aircraft_key,
     tailnum
 from cte_a
+order by tailnum asc

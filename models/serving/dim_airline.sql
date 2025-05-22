@@ -16,3 +16,4 @@ select
     airlinecode,
     airlinename
 from cte_a
+order by airlinecode asc

@@ -178,4 +178,63 @@ models:
       - name: statename
         description: Full state name where the airport is located.
 
-
+  - name: fact_flights
+    description: >
+      Fact table containing enriched flight records with surrogate keys and 
+      calculated metrics such as distance group, departure delay flag, 
+      and timestamp fields.
+    columns:
+      - name: transactionid
+        description: Unique identifier for each flight transaction.
+      - name: flightdate
+        description: Date of the flight.
+      - name: airline_key
+        description: Surrogate key generated from airlinecode.
+      - name: aircraft_key
+        description: Surrogate key generated from tail number.
+      - name: flightnum
+        description: Flight number assigned by the airline.
+      - name: origin_airport_key
+        description: Surrogate key for the origin airport.
+      - name: destination_airport_key
+        description: Surrogate key for the destination airport.
+      - name: crsdeptime
+        description: Scheduled departure time.
+      - name: deptime
+        description: Actual departure time.
+      - name: depdelay
+        description: Delay in departure, in minutes.
+      - name: taxiout
+        description: Taxi-out time in minutes.
+      - name: wheelsoff
+        description: Time when the plane took off.
+      - name: wheelson
+        description: Time when the plane landed.
+      - name: taxiin
+        description: Taxi-in time in minutes.
+      - name: crsarrtime
+        description: Scheduled arrival time.
+      - name: arrtime
+        description: Actual arrival time.
+      - name: arrdelay
+        description: Delay in arrival, in minutes.
+      - name: crselapsedtime
+        description: Scheduled elapsed flight time.
+      - name: actualelapsedtime
+        description: Actual elapsed flight time.
+      - name: cancelled
+        description: Whether the flight was cancelled (0 or 1).
+      - name: diverted
+        description: Whether the flight was diverted (0 or 1).
+      - name: distance
+        description: Flight distance in miles (includes unit suffix).
+      - name: distancegroup
+        description: Bucketed distance group (e.g., "0-100 miles").
+      - name: depdelaygt15
+        description: Flag indicating whether departure delay > 15 minutes.
+      - name: departure_timestamp
+        description: Combined timestamp of flightdate and departure time.
+      - name: arrival_timestamp
+        description: Calculated arrival timestamp using departure and elapsed time.
+      - name: nextdayarr
+        description: Flag indicating whether arrival occurred on the next day.
