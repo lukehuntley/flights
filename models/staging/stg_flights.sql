@@ -80,42 +80,6 @@ with cte_a as (
         diverted,  
         distance,
         -- cast(replace(distance, ' miles', '') as integer) as distance,
-        -- to_timestamp(
-        --     concat(
-        --         to_char(to_date(to_char(flightdate), 'YYYYMMDD'), 'YYYYMMDD'),
-        --         ' ',
-        --         lpad(deptime, 4, '0')
-        --     ),
-        --     'YYYYMMDD HH24MI'
-        --     ) AS departure_timestamp
-    --     case 
-    --         when deptime = 2400 then 
-    --             to_timestamp(
-    --                 concat(
-    --                     TO_CHAR(TO_DATE(TO_CHAR(flightdate), 'YYYYMMDD'), 'YYYYMMDD'),
-    --                     ' 0000'
-    --                 ),
-    --                 'YYYYMMDD HH24MI'
-    --             )
-    --         else
-    --             to_timestamp(
-    --                 concat(
-    --                     TO_CHAR(TO_DATE(TO_CHAR(flightdate), 'YYYYMMDD'), 'YYYYMMDD'), 
-    --                     ' ', 
-    --                     lpad(deptime, 4, '0')
-    --                 ),
-    --                 'YYYYMMDD HH24MI'
-    --             )
-    --     end as departure_timestamp,
     from {{ source('raw_flights', 'raw_flights') }}
 )
 select * from cte_a
--- select
---     cte_a.*,
---     DATEADD(MINUTE, cte_a.actualelapsedtime, cte_a.departure_timestamp) as arrival_timestamp
--- from cte_a
--- where cte_a.transactionid = '120382400'
--- limit 100
-
-
-
