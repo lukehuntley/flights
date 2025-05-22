@@ -155,10 +155,8 @@ models:
     columns:
       - name: airline_key
         description: Surrogate key generated from the airline code.
-
       - name: airlinecode
         description: IATA code of the airline.
-
       - name: airlinename
         description: Name of the airline.
 
@@ -169,19 +167,14 @@ models:
     columns:
       - name: airport_key
         description: Surrogate key generated from the airport code.
-
       - name: airportcode
         description: IATA code of the airport.
-
       - name: airportname
         description: Name of the airport.
-
       - name: cityname
         description: City where the airport is located.
-
       - name: statecode
         description: Abbreviated state where the airport is located.
-
       - name: statename
         description: Full state name where the airport is located.
 
