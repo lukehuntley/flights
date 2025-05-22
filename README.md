@@ -12,15 +12,15 @@ A case study do ingest a flat file into Snowflake, normalise the data into star 
 -   Author
 
 ## :soccer: Goal
-1. Work with unfamiliar data and quickly gain familiarity with that data.
-2. Load the data from a file-based source into a target Snowflake database. 
-3. Transform the data into a normalized, dimensional data model with appropriate data types.
-4. Think critically about preparing data for business users and analytics consultants.
+-   Work with unfamiliar data and quickly gain familiarity with that data.
+-   Load the data from a file-based source into a target Snowflake database. 
+-   Transform the data into a normalized, dimensional data model with appropriate data types.
+-   Think critically about preparing data for business users and analytics consultants.
 
 ## :rocket: Overview
 -   dbt Cloud was used to develop the SQL scripts.
 -   The dbt project code was stored in a Github repo.
--   dbt Cloud orchestrates the exection of the SQL models generating tables and views
+-   dbt Cloud orchestrates the exection of the SQL models generating tables and views.
 
 ## :memo: Prerequisites
 -   Github repo
@@ -32,7 +32,7 @@ A case study do ingest a flat file into Snowflake, normalise the data into star 
 **To be completed**
 
 ## :computer: Usage 
-1.  Login to the dbt Cloud IDE and run the command `dbt run`
+1.  Login to the dbt Cloud IDE and run the command `dbt run`.
 
 2.  Login to Snowflake to see the database objects that were created.
 
